@@ -43,6 +43,7 @@ module.exports = {
         primary: "#FAFAFA",
         secColor: "#efefef",
         navColor: "#BEBEBE",
+        hadingColor: "#2e2e2e",
       },
       backgroundColor: {
         mainColor: "#FBF8F9",
