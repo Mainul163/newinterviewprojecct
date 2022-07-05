@@ -36,7 +36,10 @@ const Header = () => {
 
       {/* mobile  */}
 
-      <div className=" flex md:hidden h-full  w-full "></div>
+      <div className=" flex md:hidden h-full  w-full ">
+     huadi for push
+
+      </div>
     </header>
   );
 };
