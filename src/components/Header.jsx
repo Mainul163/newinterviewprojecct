@@ -1,5 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import logo from "../asists/img/logo.png";
+import Avatar from "../asists/img/avatar.png";
 import { MdShoppingBasket } from "react-icons/md";
 const Header = () => {
   return (
@@ -7,10 +10,10 @@ const Header = () => {
       {/* destop & tablet */}
 
       <div className=" hidden w-full h-full  md:flex ">
-        <div className="flex items-center gap-2">
+        <Link to={"/"} className="flex items-center gap-2">
           <img src={logo} className="w-8 object-cover" alt="logo" />
-          <p className="text test-headingColor font-bold text-xl">City</p>
-        </div>
+          <p className="text test-headingColor font-bold   text-xl">City</p>
+        </Link>
         <ul className="flex items-center gap-8 ml-auto">
           <li className="text-base text-textColor duration-100 transition-all ease-in-out cusor-pointer hover:text-headingColor">
             Home
@@ -32,14 +35,21 @@ const Header = () => {
             <p className="text-xs text-white font-semibold">2</p>
           </div>
         </div>
+
+        <div className="gap-2 flex ml-2">
+          <motion.img
+            whileTap={{ scale: 0.6 }}
+            src={Avatar}
+            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl 
+             cursor-pointer"
+            alt="userprofile"
+          />
+        </div>
       </div>
 
       {/* mobile  */}
 
-      <div className=" flex md:hidden h-full  w-full ">
-     huadi for push
-
-      </div>
+      <div className=" flex md:hidden h-full  w-full ">huadi for push</div>
     </header>
   );
 };
