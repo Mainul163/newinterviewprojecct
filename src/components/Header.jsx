@@ -4,7 +4,16 @@ import { Link } from "react-router-dom";
 import logo from "../asists/img/logo.png";
 import Avatar from "../asists/img/avatar.png";
 import { MdShoppingBasket } from "react-icons/md";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../firebase.config";
+
 const Header = () => {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const logIn = async () => {
+    const response = await signInWithPopup(firebaseAuth, provider);
+    console.log(response);
+  };
   return (
     <header className="fixed w-screen z-50  p-6 px-16">
       {/* destop & tablet */}
@@ -36,14 +45,17 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="gap-2 flex ml-2">
-          <motion.img
-            whileTap={{ scale: 0.6 }}
-            src={Avatar}
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl 
+        <div className="relative">
+          <div className="gap-2 flex ml-2">
+            <motion.img
+              whileTap={{ scale: 0.6 }}
+              src={Avatar}
+              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl 
              cursor-pointer"
-            alt="userprofile"
-          />
+              alt="userprofile"
+              onClick={logIn}
+            />
+          </div>
         </div>
       </div>
 
