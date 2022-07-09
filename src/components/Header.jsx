@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import logo from "../asists/img/logo.png";
 import Avatar from "../asists/img/avatar.png";
-import { MdShoppingBasket } from "react-icons/md";
+import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebase.config";
 import { useStateValue } from "./../context/StateProvider";
@@ -15,15 +15,17 @@ const Header = () => {
   const [{ user }, dispatch] = useStateValue();
 
   const logIn = async () => {
-    const {
-      user: { refreshToken, providerData },
-    } = await signInWithPopup(firebaseAuth, provider);
-    dispatch({
-      type: actionType.SET_USER,
+    if (!user) {
+      const {
+        user: { refreshToken, providerData },
+      } = await signInWithPopup(firebaseAuth, provider);
+      dispatch({
+        type: actionType.SET_USER,
 
-      user: providerData[0],
-    });
-    localStorage.setItem("user", JSON.stringify(providerData[0]));
+        user: providerData[0],
+      });
+      localStorage.setItem("user", JSON.stringify(providerData[0]));
+    }
   };
   return (
     <header className="fixed w-screen z-50  p-6 px-16">
@@ -67,6 +69,15 @@ const Header = () => {
               alt="userprofile"
               onClick={logIn}
             />
+          </div>
+          <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute  top-12 right-0">
+            <p className="px-4 py-2 flex item-center gap-3 cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-base">
+              New Item <MdAdd className="mt-1" />
+            </p>
+
+            <p className="px-4 py-2 flex item-center gap-3 cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-base">
+              Logout <MdLogout className="mt-1" />
+            </p>
           </div>
         </div>
       </div>
